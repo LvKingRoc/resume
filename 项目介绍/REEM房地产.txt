@@ -1,0 +1,301 @@
+REEM Insight（REEM_Insight）项目详细介绍
+REEM Insight 是一个聚焦阿联酋阿布扎比 Al Reem Island 区域的房地产数据可视化与分析平台，提供 地图交互 + 房源筛选 + 多层级聚合统计 + 详情与趋势 的一体化查询体验，并支持 Web 形态 与 Electron 桌面端形态。
+
+1. 项目概览
+项目	说明
+项目名称	REEM Insight（包名 reem-insight）
+当前版本	0.0.2
+核心定位	面向 Al Reem Island 的房产数据可视化分析与查询
+主要形态	Web（Vite 构建静态站点） + Electron 桌面应用（Windows NSIS 安装包）
+主要语言	中文 / 英文（内置国际化切换）
+地图能力	Google Maps JavaScript API（API Key 由后端配置接口下发，前端动态加载）
+后端协作方式	通过 REST API（统一前缀 /api/v1，响应含 code/message/data 包装）
+前端路由	Hash 路由（兼容 Electron 的 file:// 加载与静态部署）
+2. 业务与数据层级（地理模型）
+项目围绕"地理层级 + 房源"组织数据与页面：
+
+Nation（国家）
+City（城市）
+Area（区域）
+Community（社区）
+Specific Community（具体小区，可为空）
+Property（房源）
+该层级直接决定了地图聚合策略与详情页层级（社区详情 / 小区详情 / 房源详情）。
+
+3. 产品形态与体验目标
+Web 版
+定位：快速部署与访问，适合内部演示、数据浏览与轻量使用。
+运行特点：开发环境通过 Vite 代理解决前后端联调；生产环境可由 Nginx 提供静态资源并按需反向代理 /api/。
+Electron 桌面版
+定位：更接近"桌面工具"的体验（自定义标题栏、窗口控制、外链打开等）。
+运行特点：将 Web 构建产物打包进桌面应用；提供 Windows 安装包（NSIS），并对图标/快捷方式做了定制处理。
+4. 技术栈与关键依赖（以仓库实际配置为准）
+前端框架
+Vue 3.4
+Vite 5
+vue-router 4（Hash History）
+vue-i18n 9（中英切换，语言状态持久化到 localStorage）
+Pinia 2（已集成到应用初始化流程，便于后续扩展全局状态）
+网络与 API
+Axios：统一封装 API Client，包含请求/响应拦截器、统一错误映射（400/404/500/超时等），并结合 i18n 输出可本地化的错误文案。
+参数构建：筛选条件与视口参数会被规范化为后端所需的 query 参数格式（如 furnishing_status、completion_status、price_type 等）。
+地图
+Google Maps JavaScript API
+动态加载策略：前端先通过配置接口拿到 googleMapsApiKey，再动态插入 Google Maps 脚本；并处理"鉴权失败/加载失败/初始化超时"等场景。
+样式体系
+SCSS + 设计变量（Design Tokens）+ Mixins
+Inter 字体（通过 Google Fonts 引入）
+全局滚动条样式、卡片/按钮/输入框等统一 mixin，确保 UI 一致性与可维护性。
+桌面端与构建
+Electron 28
+electron-builder（Windows 目标为 NSIS）
+sharp + SVG→ICO 构建脚本（生成多尺寸 ico，改善桌面快捷方式图标质量）
+自定义 NSIS 安装脚本（用于修复快捷方式图标等细节）
+5. 核心功能全景（按页面与交互拆解）
+5.1 地图主页（/）——"地图 + 列表"的主工作台
+页面结构分为两大区域：
+
+左侧：Google Maps 地图面板
+地图初始化：从后端获取地图配置（API Key、中心点、默认缩放）。
+地图样式策略：默认隐藏 POI（兴趣点）、交通等信息，降低噪音，突出房源数据层。
+地图控制
+缩放：自定义放大/缩小按钮。
+定位：一键回到默认中心与默认缩放。
+缩放级别显示：界面上展示当前 Zoom。
+地图模式
+标准/卫星切换：切换地图 roadmap 与 hybrid（卫星混合）显示。
+历史小区显示开关：控制是否渲染"历史小区（灰色浮标）"。
+右侧：房源列表（与地图视口联动）
+数据来源：来自 /api/v1/properties/ 的分页列表（按当前视口 + 筛选条件）。
+卡片展示：状态、类别、小区/社区、标题、户型/面积、总价与单价等。
+交互
+排序：默认/价格/面积/最新等（前端选择后映射到后端 sort）。
+分页：支持切换每页条数与输入页码跳转。
+点击卡片：进入房源详情页。
+5.2 地图浮标体系（按 Zoom 分层聚合）
+项目采用"缩放阈值切换数据层"的策略（阈值为 Zoom >= 17 进入细粒度模式）：
+
+A. Zoom 较低（Zoom < 17）：社区聚合层（紫色浮标）
+数据来源
+接口：GET /api/v1/communities/markers/
+意义：把当前视口内房源按 community 聚合，提供"社区级别"的统计概览。
+浮标内容
+社区名称
+平均单价（AED/m²）
+房源数量
+完工/在建数量
+点击行为
+进入社区详情页：/community/:community
+B. Zoom 较高（Zoom >= 17）：小区 + 房源层（蓝/绿/灰）
+数据来源
+接口：GET /api/v1/specific_community/markers/
+浮标类型
+蓝色：在售小区（Specific Community）聚合浮标
+展示：小区均价、房源数量、完工/在建数量等
+点击跳转：进入小区详情页 /specific-community/:community/:specificCommunity
+绿色：房源点位浮标
+展示：标题截断、状态、户型/面积、单价、总价等信息
+点击跳转：进入房源详情页 /property/:id
+灰色：历史小区浮标（可选显示）
+来源字段：history_specific_community_info（见 V1.1 变更）
+意义：曾经有房源，但当前无在售房源的小区，便于用户做"历史热度/存量"参考
+展示开关：用户可一键显示/隐藏
+C. 自定义 Marker 实现方式（关键技术点）
+地图浮标不是使用默认 Marker 图标，而是使用：
+
+Google Maps OverlayView 自定义覆盖物：
+优点
+可用任意 HTML/CSS 生成浮标外观与 tooltip（更接近产品 UI 设计）
+悬停层级可控（hover 时提升 z-index，避免 tooltip 被遮挡）
+交互
+点击浮标触发路由跳转
+hover 时展示 tooltip（单价、数量、状态等）
+5.3 数据刷新与性能策略（地图视口联动）
+触发时机
+地图 idle 事件：用户平移/缩放结束后触发刷新。
+筛选条件变化：深度监听筛选对象变化，自动刷新。
+语言切换：刷新浮标显示文案（比如状态/类别显示中英文）。
+并行请求
+刷新时并行获取：
+房源列表（用于右侧列表）
+浮标数据（取决于当前 zoom：社区浮标 或 小区+房源浮标）
+防抖
+使用防抖（300ms）避免频繁视口变化导致"请求风暴"。
+5.4 筛选系统（Filter Panel）
+筛选面板以"芯片（Chip）多选 + 区间输入 + 快捷选项"的方式提供复杂筛选能力：
+
+多选枚举
+类别：Apartment、Townhouse、Villa、Penthouse 等
+卧室：Studio、1、2、3、4+
+卫生间：1、2、3、4、5+
+用途：for-sale / for-rent
+装修：furnished / unfurnished
+完工状态：completed / under-construction
+区间筛选
+面积范围：支持手动输入最小/最大
+价格范围：支持"总价/单价"两种口径切换（priceType）
+快捷选项
+面积快捷区间（如 <100m²、100-150m² 等）
+价格快捷区间（总价与单价各自一组）
+操作能力
+全选（重置为默认全选）
+清空（全部取消选择）
+应用（关闭面板并刷新数据）
+筛选与后端参数映射
+前端会将筛选对象转换为后端 query 参数（例如 furnishing_status、completion_status、price_min/max、area_min/max 等）
+5.5 房源详情页（/property/:id）
+用于查看单个房源的"完整信息 + 关联推荐"。
+
+核心信息块
+状态标签：完工/在建（带本地化文本）
+装修、用途、类别等标签
+价格：总价 + 单价
+基础参数：卧室/卫生间/面积
+开发商、项目名
+创建时间、更新时间
+外部链接
+提供"查看原始房源"的跳转能力（当前 UI 文案与字段指向外部房源网站链接，例如 Bayut 链接）
+在 Electron 环境下通过预加载 API 调用系统默认浏览器打开；在 Web 环境下使用新标签页打开
+同小区关联房源
+接口返回 relatedProperties（用于展示同小区/同社区的关联在售项）
+支持点击关联项继续跳转到其它房源详情
+5.6 社区详情页（/community/:community）
+社区详情页体现"社区级别"的统计与趋势。
+
+概况统计
+平均单价（社区维度）
+总价区间、单价区间、面积区间
+社区在售房源列表（接口可默认返回一部分）
+均价走势图
+时间维度：3m / 6m / 1y / 3y
+具备"涨跌幅"计算与显示（最近 3m/6m/1y）
+图表实现采用 Canvas 绘制（可在无图表库依赖的情况下实现轻量趋势图），并支持窗口 resize 后重绘
+小区列表
+展示该社区下的 Specific Community 列表（包含数量与均价）
+点击进入小区详情页
+房源列表
+在详情页内以列表方式呈现，支持本地排序（价格/面积）
+5.7 小区详情页（/specific-community/:community/:specificCommunity）
+用于呈现"Specific Community"维度的统计与房源列表：
+
+小区概况
+小区名称、所属社区/区域/城市
+开发商与项目名称（如果有）
+完工状态（本地化显示）
+均价与价格/面积区间
+小区在售房源列表
+展示该小区的房源列表
+支持价格/面积排序
+点击进入房源详情页
+跨层级导航
+支持从小区详情返回社区详情、返回地图主页
+5.8 国际化（中英双语）
+UI 文案国际化
+中英文语言包（zh / en）
+Header 提供一键切换按钮，并把语言写入 localStorage 持久化
+后端字段国际化配合
+项目约定后端返回 xxx_zh / xxx_en 字段（例如 completionStatus_zh/_en、category_zh/_en）
+前端通过 useLocale 的"字段后缀选择策略"统一读取
+5.9 "未来功能"的明确信号（仓库内可见）
+Statistics 导航项为 disabled + Coming Soon
+表明项目规划中存在"数据统计/仪表盘"类页面，但当前版本未启用。
+仓库文档中存在更宏观需求说明书
+文档描述了更大范围的"市场报告、AI 概括、更多数据模块"等方向；当前仓库实现以"地图与房源分层数据分析"为核心主线。
+6. 系统架构（前端/桌面端）与模块职责
+6.1 应用外壳（App Shell）
+AppHeader
+窗口拖拽区域（Electron 下配合无边框窗口）
+语言切换
+窗口控制：最小化/最大化/关闭（通过 preload 暴露的 electronAPI 调用）
+AppFooter
+展示平台基础信息
+6.2 页面与路由
+路由模式：Hash History
+页面
+地图主页：MapHome
+房源详情：Property
+社区详情：CommunityDetails
+小区详情：SpecificCommunityDetails
+6.3 API 模块（统一封装）
+Axios 实例
+统一 baseURL：{VITE_API_BASE_URL}/api/v1
+统一超时时间、统一响应解包（code === 200 才返回 data）
+统一错误翻译与异常抛出
+按领域拆分
+Property API：房源列表/详情/小区+房源浮标
+Community API：社区浮标/社区详情/小区详情等
+6.4 地图加载与错误处理（关键稳定性能力）
+错误类型覆盖
+Key 未获取到 / Key 缺失
+鉴权失败（Google Maps gm_authFailure）
+脚本加载失败
+初始化超时
+策略
+将错误映射为可本地化文案，显示在地图占位区域
+提供"刷新地图"能力：清理状态并重建 Map 实例（但不卸载 Google Maps 脚本，以规避 custom elements 重复注册问题）
+7. 后端 API 约定（以需求文档与前端调用为准）
+当前仓库主要为前端/Electron 客户端；后端由独立服务提供。后端需求文档中定义后端技术栈为 Django + DRF，数据库为 PostgreSQL。
+
+7.1 接口列表（核心）
+接口	用途	前端使用位置
+GET /api/v1/config/google_map/	获取 Google Maps API Key、地图中心点与默认缩放	地图初始化
+GET /api/v1/properties/	房源列表（视口 + 筛选 + 分页 + 排序）	地图主页右侧列表
+GET /api/v1/properties/{id}/	房源详情（含 relatedProperties）	房源详情页
+GET /api/v1/communities/markers/	社区浮标（Zoom 较低时的聚合层）	地图主页（Zoom < 17）
+GET /api/v1/specific_community/markers/	小区+房源浮标（Zoom 较高时的细粒度层）	地图主页（Zoom >= 17）
+GET /api/v1/communities/{community}/	社区详情（统计 + 走势 + 小区列表 + 默认房源列表）	社区详情页
+GET /api/v1/communities/{community}/properties/	社区房源分页列表（独立分页接口）	已封装，当前页面主要使用详情接口内嵌列表
+GET /api/v1/communities/{community}/specific/{specificCommunity}/	小区详情（统计 + 走势 + 房源列表）	小区详情页
+7.2 通用查询参数（地图相关接口共用）
+视口范围（必需）
+min_lat / max_lat
+min_lng / max_lng
+筛选条件（可选）
+bedrooms：多选逗号分隔，支持 4+
+bathrooms：多选逗号分隔，支持 5+
+purpose：for-sale / for-rent（可多选）
+furnishing_status：furnished / unfurnished（可多选）
+completion_status：completed / under-construction（可多选）
+category：房源类别（可多选）
+price_type：total / unit
+price_min / price_max
+area_min / area_max
+分页与排序（列表接口）
+page / page_size
+sort：例如 date_desc、price_asc/desc、area_asc/desc、unit_price_asc/desc
+7.3 V1.1 变更：历史小区字段
+接口：GET /api/v1/specific_community/markers/
+新增字段：history_specific_community_info
+前端表现
+在 Zoom >= 17 的细粒度模式下，允许用户通过按钮显示/隐藏"灰色历史小区浮标"
+即使后端暂未返回该字段，前端也能正常运行（只是不显示历史小区层）
+8. 环境配置与联调方式（关键点说明）
+开发环境
+Vite 使用固定端口（来自 VITE_DEV_PORT）
+API 调用默认走同域 /api，再由 Vite 代理转发到 VITE_PROXY_TARGET 指定的后端地址
+生产环境
+通过 VITE_API_BASE_URL 指向真实后端地址，前端直接请求 {baseURL}/api/v1/...
+Google Maps API Key
+不在前端环境变量中硬编码，而是由后端配置接口下发
+前端拿到 key 后动态加载 Google Maps 脚本
+9. 构建、发布与部署（不含命令代码，仅说明流程）
+9.1 Web 发布
+构建产物目录：dist-web
+静态资源组织：资源目录与相对路径适配（Vite base 设置为相对路径，便于静态部署与 Electron file 加载）
+Nginx 部署要点
+可启用静态资源长缓存（/assets/）
+可选：将 /api/ 反向代理到后端服务，形成"同域访问"
+9.2 Electron 桌面端发布
+打包方式：electron-builder
+Windows 安装包：NSIS
+关键细节
+生成多尺寸 icon.ico，避免 Windows 快捷方式模糊
+自定义 NSIS 脚本用于修复桌面快捷方式图标等问题
+打包文件包含：dist-web（前端产物）与 electron 主进程/预加载脚本
+10. 安全与工程化注意事项（基于仓库现状给出客观提示）
+敏感信息管理
+项目文档中曾出现明文凭据/连接信息的情况：建议移出仓库、改用安全的凭据管理方式（例如环境变量、密钥管理服务、或至少使用脱敏示例）。
+Electron 网络与安全开关
+主进程中存在"忽略证书错误"等配置：建议区分开发/生产环境，并在生产环境收紧策略。
+CSP（内容安全策略）
+入口页面备注"CSP 已禁用"：如果面向公网或更高安全要求场景，建议补齐 CSP 并明确允许的域名白名单（尤其是地图脚本与 API 域名）。

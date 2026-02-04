@@ -1,0 +1,234 @@
+@use 'variables' as *;
+
+// ========================================
+// 响应式断点
+// ========================================
+@mixin mobile {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+// ========================================
+// 布局
+// ========================================
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// ========================================
+// 科技风卡片
+// ========================================
+@mixin tech-card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  transition: all $transition-normal;
+  
+  &:hover {
+    background: $bg-card-hover;
+    border-color: $border-glow;
+    box-shadow: $shadow-glow;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin tech-card-static {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+}
+
+// ========================================
+// 发光效果
+// ========================================
+@mixin glow-text {
+  color: $primary-color;
+  text-shadow: 0 0 10px $primary-glow, 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+@mixin glow-border {
+  border-color: $primary-color;
+  box-shadow: 0 0 15px $primary-glow, inset 0 0 15px rgba(0, 212, 255, 0.05);
+}
+
+// ========================================
+// 按钮
+// ========================================
+@mixin tech-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  background: transparent;
+  border: 1px solid $primary-color;
+  border-radius: $radius-md;
+  color: $primary-color;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-normal;
+  
+  &:hover {
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: $shadow-glow;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin tech-button-solid {
+  @include tech-button;
+  background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
+  border: none;
+  color: $bg-primary;
+  
+  &:hover {
+    background: linear-gradient(135deg, $primary-light 0%, $primary-color 100%);
+    box-shadow: $shadow-glow-strong;
+  }
+}
+
+// ========================================
+// 标签
+// ========================================
+@mixin tech-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: $radius-sm;
+  color: $primary-color;
+  font-size: $font-size-xs;
+  font-family: $font-mono;
+  white-space: nowrap;
+}
+
+// ========================================
+// 网格线背景
+// ========================================
+@mixin grid-background {
+  background-image: 
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+// ========================================
+// 渐变文字
+// ========================================
+@mixin gradient-text {
+  background: linear-gradient(135deg, $primary-color 0%, $accent-light 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ========================================
+// 滚动条
+// ========================================
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $bg-secondary;
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $border-color;
+    border-radius: 3px;
+    
+    &:hover {
+      background: $text-muted;
+    }
+  }
+}
+
+// ========================================
+// 动画
+// ========================================
+@mixin fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@mixin slide-up {
+  animation: slideUp 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px $primary-glow;
+  }
+  50% {
+    box-shadow: 0 0 20px $primary-glow, 0 0 30px rgba(0, 212, 255, 0.2);
+  }
+}

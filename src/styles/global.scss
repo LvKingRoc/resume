@@ -1,0 +1,191 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ========================================
+// 重置与基础样式
+// ========================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  
+  @include mobile {
+    font-size: 14px;
+  }
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background: $bg-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  
+  @include custom-scrollbar;
+}
+
+// ========================================
+// 链接
+// ========================================
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $primary-light;
+  }
+}
+
+// ========================================
+// 图片
+// ========================================
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// ========================================
+// 列表
+// ========================================
+ul, ol {
+  list-style: none;
+}
+
+// ========================================
+// 按钮
+// ========================================
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  
+  &:focus {
+    outline: none;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+}
+
+// ========================================
+// 输入框
+// ========================================
+input, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+// ========================================
+// 选中文本
+// ========================================
+::selection {
+  background: rgba(0, 212, 255, 0.3);
+  color: $text-primary;
+}
+
+// ========================================
+// 容器
+// ========================================
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  
+  @include mobile {
+    padding: 0 $spacing-md;
+  }
+}
+
+// ========================================
+// 区块
+// ========================================
+.section {
+  padding: $spacing-3xl 0;
+}
+
+.section-title {
+  font-size: $font-size-3xl;
+  font-weight: 700;
+  margin-bottom: $spacing-2xl;
+  position: relative;
+  display: inline-block;
+  
+  @include gradient-text;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, $primary-color 0%, transparent 100%);
+    border-radius: 2px;
+  }
+  
+}
+
+// ========================================
+// 工具类
+// ========================================
+.text-primary {
+  color: $primary-color;
+}
+
+.text-secondary {
+  color: $text-secondary;
+}
+
+.text-muted {
+  color: $text-muted;
+}
+
+.font-mono {
+  font-family: $font-mono;
+}
+
+.glow-text {
+  @include glow-text;
+}
+
+// ========================================
+// 背景装饰
+// ========================================
+.bg-grid {
+  @include grid-background;
+}
+
+.bg-gradient {
+  background: $bg-gradient;
+}
+
+// ========================================
+// 动画类
+// ========================================
+.animate-fade-in {
+  @include fade-in;
+}
+
+.animate-slide-up {
+  @include slide-up;
+}

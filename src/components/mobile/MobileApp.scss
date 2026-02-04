@@ -1,0 +1,912 @@
+@use '@/styles/variables' as *;
+
+.mobile-app {
+  min-height: 100vh;
+  background: $bg-primary;
+}
+
+// 顶部导航
+.m-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba($bg-primary, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  z-index: 100;
+  
+  &__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+  
+  &__tip {
+    font-size: 10px;
+    color: $primary-color;
+    background: rgba($primary-color, 0.1);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+}
+
+// 主内容
+.m-main {
+  padding: 68px 16px 24px;
+}
+
+// 通用区块
+.m-section {
+  margin-bottom: 24px;
+  
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 3px solid $primary-color;
+  }
+}
+
+// Hero 区域 - 左右布局
+.m-hero {
+  padding: 16px;
+  background: $bg-card;
+  border-radius: 12px;
+  border: 1px solid $border-color;
+  
+  &__top {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  
+  &__left {
+    flex-shrink: 0;
+  }
+  
+  &__avatar-wrapper {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &__avatar-ring {
+    position: absolute;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      $primary-color,
+      $accent-color,
+      $accent-light,
+      $primary-color
+    );
+    animation: rotate 3s linear infinite;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: $bg-card;
+    }
+    
+    &--2 {
+      width: 96px;
+      height: 96px;
+      background: conic-gradient(
+        from 180deg,
+        transparent 0%,
+        rgba($primary-color, 0.5) 25%,
+        transparent 50%,
+        rgba($accent-color, 0.5) 75%,
+        transparent 100%
+      );
+      animation: rotate 4s linear infinite reverse;
+      
+      &::before {
+        display: none;
+      }
+    }
+  }
+  
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  &__avatar {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: $bg-card;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 0 20px rgba($primary-color, 0.3);
+    
+    &-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    &-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, $bg-card 0%, $bg-secondary 100%);
+    }
+  }
+  
+  &__age {
+    font-size: 20px;
+    font-weight: 800;
+    background: linear-gradient(135deg, $primary-color 0%, $accent-light 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  &__age-label {
+    font-size: 11px;
+    color: $text-secondary;
+  }
+  
+  &__right {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  &__name {
+    font-size: 20px;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 2px;
+  }
+  
+  &__title {
+    font-size: 13px;
+    color: $primary-color;
+    margin-bottom: 8px;
+  }
+  
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: $text-secondary;
+      text-decoration: none;
+      padding: 4px 6px;
+      margin: -4px -6px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      
+      &:active {
+        background: rgba($primary-color, 0.1);
+      }
+      
+      &--copied {
+        background: rgba(#22c55e, 0.15);
+        color: #22c55e;
+        
+        svg {
+          color: #22c55e;
+        }
+      }
+      
+      svg {
+        width: 12px;
+        height: 12px;
+        flex-shrink: 0;
+        color: $primary-color;
+      }
+      
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    
+    &-copy {
+      margin-left: auto;
+      opacity: 0.4;
+      
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+  
+  &__print-btns {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  
+  &__print-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 12px;
+    background: linear-gradient(135deg, $primary-color, $accent-color);
+    border-radius: 20px;
+    font-size: 12px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+    
+    &--backend {
+      background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+    }
+  }
+  
+  &__stats {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 12px;
+    border-top: 1px solid $border-color;
+  }
+  
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    &-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: $primary-color;
+    }
+    
+    &-label {
+      font-size: 11px;
+      color: $text-muted;
+    }
+  }
+}
+
+// 技能区域
+.m-skills {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  &__category {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 12px;
+    
+    &-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 8px;
+    }
+  }
+  
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  
+  &__tag {
+    padding: 4px 8px;
+    background: rgba($primary-color, 0.1);
+    border: 1px solid rgba($primary-color, 0.2);
+    border-radius: 4px;
+    font-size: 12px;
+    color: $text-secondary;
+    font-family: $font-mono;
+    
+    &--advanced {
+      background: rgba($accent-color, 0.15);
+      border-color: rgba($accent-color, 0.3);
+      color: $accent-light;
+      font-weight: 500;
+    }
+  }
+}
+
+// 项目区域
+.m-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.m-project {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  overflow: hidden;
+  
+  &--expanded {
+    border-color: rgba($primary-color, 0.3);
+  }
+  
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    cursor: pointer;
+  }
+  
+  &__info {
+    flex: 1;
+  }
+  
+  &__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 2px;
+  }
+  
+  &__period {
+    font-size: 12px;
+    color: $text-muted;
+    font-family: $font-mono;
+  }
+  
+  &__toggle {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+      width: 16px;
+      height: 16px;
+      color: $text-muted;
+    }
+  }
+  
+  &__body {
+    padding: 0 12px 12px;
+    border-top: 1px solid $border-color;
+  }
+  
+  &__images {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  
+  &__image {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid $border-color;
+    cursor: pointer;
+    flex-shrink: 0;
+    
+    &:active {
+      opacity: 0.8;
+    }
+  }
+  
+  &__image-more {
+    width: 80px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($primary-color, 0.1);
+    border: 1px solid rgba($primary-color, 0.2);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $primary-color;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  
+  &__desc {
+    font-size: 13px;
+    color: $text-secondary;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+  
+  &__section {
+    margin-bottom: 12px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    &-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: $primary-color;
+      margin-bottom: 8px;
+    }
+  }
+  
+  &__highlights {
+    list-style: none;
+    
+    li {
+      position: relative;
+      padding-left: 12px;
+      font-size: 13px;
+      color: $text-secondary;
+      line-height: 1.5;
+      margin-bottom: 6px;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 4px;
+        height: 4px;
+        background: $primary-color;
+        border-radius: 50%;
+      }
+    }
+  }
+  
+  &__techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  &__tech {
+    padding: 2px 6px;
+    background: rgba($primary-color, 0.1);
+    border-radius: 3px;
+    font-size: 12px;
+    color: $primary-color;
+    font-family: $font-mono;
+  }
+}
+
+// 教育区域
+.m-education {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 16px;
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  
+  &__school {
+    font-size: 15px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+  
+  &__period {
+    font-size: 12px;
+    color: $primary-color;
+    font-family: $font-mono;
+  }
+  
+  &__meta {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  &__major {
+    font-size: 13px;
+    color: $primary-color;
+    font-weight: 500;
+  }
+  
+  &__degree {
+    font-size: 13px;
+    color: $text-secondary;
+  }
+  
+  &__courses {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  &__course-group {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  &__course-label {
+    color: $text-muted;
+  }
+  
+  &__course-list {
+    color: $text-secondary;
+  }
+  
+  &__honors {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid $border-color;
+    font-size: 13px;
+  }
+  
+  &__honors-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  
+  &__honor-tag {
+    padding: 4px 8px;
+    background: rgba($warning-color, 0.1);
+    border: 1px solid rgba($warning-color, 0.2);
+    border-radius: 4px;
+    font-size: 12px;
+    color: $warning-color;
+  }
+}
+
+// 经历区域
+.m-experience {
+  &__card {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  
+  &__school-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  
+  &__school-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+  
+  &__school-period {
+    font-size: 12px;
+    color: $primary-color;
+    font-family: $font-mono;
+  }
+  
+  &__school-role {
+    font-size: 13px;
+    color: $text-secondary;
+    margin-bottom: 12px;
+    display: block;
+  }
+  
+  &__highlights {
+    display: flex;
+    justify-content: space-around;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid $border-color;
+  }
+  
+  &__highlight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    &-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: $primary-color;
+    }
+    
+    &-label {
+      font-size: 11px;
+      color: $text-muted;
+    }
+  }
+  
+  &__roles {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  &__role-card {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 12px;
+  }
+  
+  &__role-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  &__role-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: $primary-color;
+  }
+  
+  &__role-period {
+    font-size: 12px;
+    color: $text-muted;
+    font-family: $font-mono;
+  }
+  
+  &__role-list {
+    list-style: none;
+    
+    li {
+      position: relative;
+      padding-left: 14px;
+      font-size: 13px;
+      color: $text-secondary;
+      line-height: 1.5;
+      margin-bottom: 4px;
+      
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: $success-color;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+// 关于区域
+.m-about {
+  &__strengths {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    
+    &-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 12px;
+    }
+    
+    &-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+  }
+  
+  &__strength-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba($primary-color, 0.05);
+    border: 1px solid rgba($primary-color, 0.1);
+    border-radius: 8px;
+    font-size: 12px;
+    color: $text-secondary;
+    
+    &-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba($primary-color, 0.1);
+      border-radius: 4px;
+      color: $primary-color;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+  }
+  
+  &__eval {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 16px;
+    
+    &-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 12px;
+    }
+    
+    &-content {
+      padding-left: 12px;
+      border-left: 2px solid rgba($primary-color, 0.3);
+    }
+    
+    &-para {
+      font-size: 13px;
+      color: $text-secondary;
+      line-height: 1.7;
+      margin-bottom: 12px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// 图片弹窗
+.m-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  
+  &__content {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  &__close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &__image {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 16px;
+  }
+  
+  &__nav-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+  
+  &__counter {
+    color: white;
+    font-size: 14px;
+  }
+}
+
+// Toast提示
+.m-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 9999;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  
+  &--success {
+    svg {
+      color: #10b981;
+    }
+  }
+  
+  &--error {
+    svg {
+      color: #ef4444;
+    }
+  }
+}
+
+// Toast动画
+.toast-enter-active,
+.toast-leave-active {
+  transition: all 0.3s ease;
+}
+
+.toast-enter-from {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-100%);
+}
+
+.toast-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-100%);
+}
