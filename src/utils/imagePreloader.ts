@@ -82,30 +82,19 @@ async function preloadBatch(urls: string[], concurrency = 2): Promise<void> {
   await Promise.all(workers)
 }
 
-// 在浏览器空闲时执行任务
-function runOnIdle(fn: () => Promise<void>): void {
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => fn())
-  } else {
-    setTimeout(() => fn(), 2000)
-  }
-}
-
-// 按优先级预加载
+// 按优先级预加载（页面打开即刻开始）
 export async function preloadAllImages(): Promise<void> {
   // 第一优先级：预加载preview（首屏大图）
   await preloadImage('/images/preview.webp')
 
   // 第二优先级：每个项目的首图（缩略图）
   const firstImages = Object.values(projectImages).map(imgs => imgs[0])
-  await preloadBatch(firstImages, 2)
+  await preloadBatch(firstImages, 4)
 
-  // 第三优先级：空闲时加载剩余图片
-  runOnIdle(async () => {
-    const allUrls = Object.values(projectImages).flat()
-    const restImages = allUrls.filter(url => !loadedCache.has(url))
-    await preloadBatch(restImages, 2)
-  })
+  // 第三优先级：立即加载剩余所有图片
+  const allUrls = Object.values(projectImages).flat()
+  const restImages = allUrls.filter(url => !loadedCache.has(url))
+  await preloadBatch(restImages, 3)
 }
 
 // 预加载指定项目的图片（用户切换项目时调用）

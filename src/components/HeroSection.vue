@@ -142,6 +142,7 @@ const copyToClipboard = async (text: string, index: number) => {
               v-if="personalInfo.avatar" 
               :src="personalInfo.avatar" 
               :alt="personalInfo.name"
+              loading="eager"
               class="hero__avatar-img"
             />
             <div v-else class="hero__avatar-placeholder">

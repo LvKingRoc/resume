@@ -112,6 +112,7 @@ const nextImage = () => {
                   v-if="personalInfo.avatar" 
                   :src="personalInfo.avatar" 
                   :alt="personalInfo.name"
+                  loading="eager"
                   class="m-hero__avatar-img"
                 />
                 <div v-else class="m-hero__avatar-inner">
@@ -228,7 +229,7 @@ const nextImage = () => {
                   :src="img" 
                   :alt="project.name"
                   class="m-project__image"
-                  loading="lazy"
+                  loading="eager"
                   @click="openImageModal(project.images, imgIdx)"
                 />
                 <div 
@@ -383,7 +384,7 @@ const nextImage = () => {
     <div v-if="showImageModal" class="m-modal" @click.self="closeImageModal">
       <div class="m-modal__content">
         <button class="m-modal__close" @click="closeImageModal">×</button>
-        <img :src="currentImages[currentImageIndex]" class="m-modal__image" />
+        <img :src="currentImages[currentImageIndex]" class="m-modal__image" loading="eager" />
         <div class="m-modal__nav">
           <button class="m-modal__nav-btn" @click="prevImage">‹</button>
           <span class="m-modal__counter">{{ currentImageIndex + 1 }} / {{ currentImages.length }}</span>

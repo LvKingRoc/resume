@@ -35,10 +35,6 @@ export default defineConfig(({ mode }) => ({
     minify: 'esbuild',
     rollupOptions: {
       output: {
-        // 代码分割：vue单独打包，路由懒加载自动分割
-        manualChunks: {
-          'vendor-vue': ['vue', 'vue-router'],
-        },
         // 输出文件命名（含 hash 用于长期缓存）
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',

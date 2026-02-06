@@ -57,7 +57,7 @@ const openImageModal = () => {
             >
               <div class="projects__card-header">
                 <div class="projects__card-image" @click="openImageModal">
-                  <img :src="currentProject.image" :alt="currentProject.name" loading="lazy" decoding="async" />
+                  <img :src="currentProject.image" :alt="currentProject.name" loading="eager" decoding="async" />
                   <div class="projects__card-overlay">
                     <span class="projects__card-badge">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
