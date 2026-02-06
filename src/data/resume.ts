@@ -7,7 +7,7 @@ export const personalInfo: PersonalInfo = {
   title: 'Java全栈工程师',
   phone: '15338859106',
   email: '1813197353@qq.com',
-  avatar: 'images/preview.jpg'
+  avatar: 'images/preview.webp'
 }
 
 // 教育背景
@@ -99,8 +99,8 @@ export const projects: Project[] = [
     name: '个人简历网站',
     subtitle: '响应式简历展示页',
     description: '基于Vue3 + TypeScript + SCSS构建的个人简历网站，采用组件化架构设计，支持PC端与移动端自适应布局，展示个人技能、项目经历、教育背景等信息。',
-    image: 'images/preview.jpg',
-    images: ['images/preview.jpg'],
+    image: 'images/preview.webp',
+    images: ['images/preview.webp'],
     techStack: ['Vue 3', 'TypeScript', 'SCSS', 'Vite', 'Composition API'],
     highlights: [
       '基于Vue3 Composition API构建，组件化架构设计，代码结构清晰易维护',
@@ -116,8 +116,8 @@ export const projects: Project[] = [
     name: 'REEM Insight',
     subtitle: '房地产数据可视化平台',
     description: '面向阿联酋阿布扎比Al Reem Island区域的房地产数据可视化与分析平台，提供地图交互+房源筛选+多层级聚合统计+详情与走势的一体化查询体验，同时支持Web端与Electron桌面端。',
-    image: 'images/REEM/1.png',
-    images: ['images/REEM/1.png', 'images/REEM/2.png', 'images/REEM/3.png', 'images/REEM/4.png', 'images/REEM/5.png', 'images/REEM/6.png'],
+    image: 'images/REEM/1.webp',
+    images: ['images/REEM/1.webp', 'images/REEM/2.webp', 'images/REEM/3.webp', 'images/REEM/4.webp', 'images/REEM/5.webp', 'images/REEM/6.webp'],
     techStack: ['Vue 3', 'Pinia', 'Google Maps API', 'Electron 28', 'Vue I18n', 'Spring Boot', 'MyBatis-Plus', 'PostgreSQL'],
     highlights: [
       '基于Google Maps JavaScript API实现地图可视化，支持标准/卫星地图切换、自定义样式、POI过滤',
@@ -137,8 +137,8 @@ export const projects: Project[] = [
     name: 'OfferHub',
     subtitle: '智能面试辅助平台',
     description: '智能面试辅助平台，支持Electron桌面端和Web端双平台。核心功能包括：实时辅助面试（采集系统+麦克风音频，语音转文字后AI生成建议）、模拟面试（AI出题语音播报，用户作答后AI评分总结）、面试总结报告、错题本管理、个人知识库（自定义项目描述供AI参考）。',
-    image: 'images/OfferHub/1.png',
-    images: ['images/OfferHub/1.png', 'images/OfferHub/2.png', 'images/OfferHub/3.png', 'images/OfferHub/4.png', 'images/OfferHub/5.png', 'images/OfferHub/6.png', 'images/OfferHub/7.png', 'images/OfferHub/8.png', 'images/OfferHub/9.png', 'images/OfferHub/10.png', 'images/OfferHub/11.png', 'images/OfferHub/12.png', 'images/OfferHub/13.png'],
+    image: 'images/OfferHub/1.webp',
+    images: ['images/OfferHub/1.webp', 'images/OfferHub/2.webp', 'images/OfferHub/3.webp', 'images/OfferHub/4.webp', 'images/OfferHub/5.webp', 'images/OfferHub/6.webp', 'images/OfferHub/7.webp', 'images/OfferHub/8.webp', 'images/OfferHub/9.webp', 'images/OfferHub/10.webp', 'images/OfferHub/11.webp', 'images/OfferHub/12.webp', 'images/OfferHub/13.webp'],
     techStack: ['Vue 3', 'TypeScript', 'Electron 29', 'Element Plus', 'Spring Boot', 'MyBatis-Plus', 'MySQL', 'Redis', 'AI API'],
     highlights: [
       '基于Web Audio API实现系统音频+麦克风双路采集，支持PCM和Blob格式，背压控制防止内存溢出',
@@ -162,8 +162,8 @@ export const projects: Project[] = [
     name: '道威管理系统',
     subtitle: '企业级全栈管理平台',
     description: '面向小团队的企业管理系统，提供PC端管理后台(Element Plus)和移动端H5/APP(Vant + Capacitor)双端应用，实现订单管理、样品管理、权限控制、实时数据同步等企业级功能，已服务于实际生产环境。',
-    image: 'images/daowei/1.png',
-    images: ['images/daowei/1.png', 'images/daowei/2.png', 'images/daowei/3.png', 'images/daowei/4.png', 'images/daowei/5.png', 'images/daowei/6.png', 'images/daowei/7.png', 'images/daowei/8.png', 'images/daowei/9.png'],
+    image: 'images/daowei/1.webp',
+    images: ['images/daowei/1.webp', 'images/daowei/2.webp', 'images/daowei/3.webp', 'images/daowei/4.webp', 'images/daowei/5.webp', 'images/daowei/6.webp', 'images/daowei/7.webp', 'images/daowei/8.webp', 'images/daowei/9.webp'],
     techStack: ['Vue 3', 'Pinia', 'Element Plus', 'Vant', 'Capacitor', 'Spring Boot', 'MyBatis', 'PostgreSQL'],
     highlights: [
       'PC/移动双端同仓开发，共享core核心模块(API封装、认证工具、SSE、心跳等)',
@@ -184,8 +184,8 @@ export const projects: Project[] = [
     name: 'EpClient',
     subtitle: '输液实时监控系统',
     description: '面向病区/护士站的输液状态实时监控系统，集中展示床位输液过程数据(滴速、状态、电量、输液量进度等)，帮助医护人员提升巡视效率与异常响应速度。',
-    image: 'images/EpClient/1.png',
-    images: ['images/EpClient/1.png', 'images/EpClient/2.png', 'images/EpClient/3.png', 'images/EpClient/4.png', 'images/EpClient/5.png', 'images/EpClient/6.png'],
+    image: 'images/EpClient/1.webp',
+    images: ['images/EpClient/1.webp', 'images/EpClient/2.webp', 'images/EpClient/3.webp', 'images/EpClient/4.webp', 'images/EpClient/5.webp', 'images/EpClient/6.webp'],
     techStack: ['Electron', 'Vue 3', 'Pinia', 'ECharts', 'WebSocket', 'Spring Boot', 'MyBatis', 'PostgreSQL', 'TimescaleDB'],
     highlights: [
       '基于WebSocket实现双向实时通信，监控数据推送延迟≤100ms，支持断线自动重连',

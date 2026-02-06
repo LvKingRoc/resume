@@ -60,7 +60,7 @@ const handleKeydown = (e: KeyboardEvent) => {
           
           <div class="modal__body">
             <div class="modal__image-wrapper">
-              <img :src="currentImage" :alt="`${projectName} 截图 ${currentIndex + 1}`" class="modal__image" />
+              <img :src="currentImage" :alt="`${projectName} 截图 ${currentIndex + 1}`" class="modal__image" decoding="async" />
             </div>
             
             <div class="modal__nav" v-if="images.length > 1">
