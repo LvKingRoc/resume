@@ -116,8 +116,7 @@ const nextImage = () => {
                   class="m-hero__avatar-img"
                 />
                 <div v-else class="m-hero__avatar-inner">
-                  <span class="m-hero__age">{{ personalInfo.age }}</span>
-                  <span class="m-hero__age-label">岁</span>
+                  <span class="m-hero__age">LJP</span>
                 </div>
               </div>
             </div>
@@ -159,12 +158,12 @@ const nextImage = () => {
           </div>
         </div>
         <div class="m-hero__print-btns">
-          <a href="/print-frontend" target="_blank" class="m-hero__print-btn">前端纸质简历</a>
-          <a href="/print-backend" target="_blank" class="m-hero__print-btn m-hero__print-btn--backend">后端纸质简历</a>
+          <a href="/print-frontend" target="_blank" class="m-hero__print-btn">简历·前端版</a>
+          <a href="/print-backend" target="_blank" class="m-hero__print-btn m-hero__print-btn--backend">简历·后端版</a>
         </div>
         <div class="m-hero__stats">
           <div class="m-hero__stat">
-            <span class="m-hero__stat-value">6</span>
+            <span class="m-hero__stat-value">5</span>
             <span class="m-hero__stat-label">项目</span>
           </div>
           <div class="m-hero__stat">
@@ -319,7 +318,7 @@ const nextImage = () => {
               <span class="m-experience__highlight-label">二等奖</span>
             </div>
             <div class="m-experience__highlight">
-              <span class="m-experience__highlight-value">6个</span>
+              <span class="m-experience__highlight-value">5个</span>
               <span class="m-experience__highlight-label">完整项目</span>
             </div>
           </div>

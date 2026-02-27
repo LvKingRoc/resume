@@ -18,6 +18,10 @@ const router = createRouter({
       path: '/print-backend',
       name: 'print-backend',
       component: () => import('@/views/BackendResume.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/'
     }
   ]
 })

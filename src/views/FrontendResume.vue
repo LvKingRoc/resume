@@ -28,7 +28,7 @@ onMounted(() => {
           <span class="header__dot">·</span>
           <span>1813197353@qq.com</span>
           <span class="header__dot">·</span>
-          <span>@在线简历：lvkingroc.icu:9106</span>
+          <span>@在线简历：lvkingroc.icu</span>
         </div>
       </header>
 
@@ -70,7 +70,7 @@ onMounted(() => {
           <!-- REEM Insight -->
           <div class="project">
             <div class="row-header">
-              <span class="row-header__period">2025.11 - 至今</span>
+              <span class="row-header__period">2025.11 - 2025.12</span>
               <span class="row-header__main">REEM Insight</span>
               <span class="row-header__sub">房地产数据可视化平台</span>
             </div>
@@ -102,7 +102,7 @@ onMounted(() => {
           <!-- 道威管理系统 -->
           <div class="project">
             <div class="row-header">
-              <span class="row-header__period">2024.09 - 至今</span>
+              <span class="row-header__period">2024.09 - 2025.12</span>
               <span class="row-header__main">道威管理系统</span>
               <span class="row-header__sub">企业级全栈管理平台</span>
             </div>
@@ -155,7 +155,7 @@ onMounted(() => {
       <section class="section section--last">
         <h2 class="section__title">自我评价</h2>
         <div class="section__content">
-          <p class="summary">Java全栈开发者，熟练掌握Spring Boot后端开发与Vue3前端技术栈，具备独立完成企业级全栈项目的能力。累计完成6个完整项目，涵盖企业管理、实时监控、AI应用、数据可视化等多个领域，具备多项目并行开发经验，部分项目已服务于生产环境。</p>
+          <p class="summary">Java全栈开发者，熟练掌握Spring Boot后端开发与Vue3前端技术栈，具备独立完成企业级全栈项目的能力。累计完成5个完整项目，涵盖企业管理、实时监控、AI应用、数据可视化等多个领域，具备多项目并行开发经验，部分项目已服务于生产环境。</p>
           <p class="summary">擅长实时通信技术，精通WebSocket、SSE等长连接方案，在多个项目中实现毫秒级数据同步。后端熟悉JWT鉴权、AOP日志、接口限流等安全实践；前端精通Electron桌面应用、地图可视化等进阶技术。</p>
           <p class="summary">注重系统设计和代码质量，后端遵循RESTful API规范，前端采用组件化、模块化开发。具备TimescaleDB时序数据库、Redis缓存、AI API集成等技术实践经验。</p>
           <p class="summary">连续三年国家奖学金获得者，具备优秀的学习能力和自驱力。担任副班长和社团副社长，具备良好的团队管理与组织协调能力。</p>
@@ -316,9 +316,10 @@ onMounted(() => {
   border-bottom: 1px dashed #d1d5db;
   
   &--page-break {
-    page-break-before: always;
-    margin-top: 0;
-    padding-top: 0;
+    @media print {
+      page-break-before: always;
+      padding-top: 12mm;
+    }
   }
   
   &:last-child {

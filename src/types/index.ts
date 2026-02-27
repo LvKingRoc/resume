@@ -1,7 +1,6 @@
 // 个人信息类型
 export interface PersonalInfo {
   name: string
-  age: number
   title: string
   phone: string
   email: string

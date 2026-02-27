@@ -125,10 +125,10 @@ const copyToClipboard = async (text: string, index: number) => {
             </svg>
           </a>
           <a href="/print-frontend" target="_blank" class="hero__btn hero__btn--outline">
-            前端纸质简历
+            简历·前端版
           </a>
           <a href="/print-backend" target="_blank" class="hero__btn hero__btn--outline">
-            后端纸质简历
+            简历·后端版
           </a>
         </div>
       </div>
@@ -146,15 +146,14 @@ const copyToClipboard = async (text: string, index: number) => {
               class="hero__avatar-img"
             />
             <div v-else class="hero__avatar-placeholder">
-              <span>{{ personalInfo.age }}</span>
-              <span>岁</span>
+              <span>LJP</span>
             </div>
           </div>
         </div>
         
         <div class="hero__stats">
           <div class="hero__stat">
-            <span class="hero__stat-value">6</span>
+            <span class="hero__stat-value">5</span>
             <span class="hero__stat-label">完整项目</span>
           </div>
           <div class="hero__stat">

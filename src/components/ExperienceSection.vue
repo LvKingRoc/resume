@@ -24,7 +24,7 @@ import { experience, campusRoles } from '@/data/resume'
             <span class="experience__highlight-label">二等奖</span>
           </div>
           <div class="experience__highlight">
-            <span class="experience__highlight-value">6个</span>
+            <span class="experience__highlight-value">5个</span>
             <span class="experience__highlight-label">完整项目</span>
           </div>
         </div>

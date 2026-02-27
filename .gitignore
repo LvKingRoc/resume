@@ -26,6 +26,9 @@ coverage
 
 *.tsbuildinfo
 
+# Server config
+nginx-rewrite.conf
+
 .eslintcache
 
 # Cypress

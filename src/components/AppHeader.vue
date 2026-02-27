@@ -9,7 +9,6 @@ const activeSection = ref('hero')
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
   
-  // 更新当前激活的导航项
   const sections = navItems.map(item => document.getElementById(item.id))
   const scrollPosition = window.scrollY + 100
   
