@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { selfEvaluation } from '@/data/resume'
+import { selfEvaluationBackend as selfEvaluation } from '@/data/resume'
 </script>
 
 <template>

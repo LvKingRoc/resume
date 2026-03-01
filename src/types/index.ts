@@ -4,6 +4,7 @@ export interface PersonalInfo {
   title: string
   phone: string
   email: string
+  github?: string
   avatar?: string
 }
 
@@ -56,6 +57,14 @@ export interface CampusRole {
   title: string
   period: string
   achievements: string[]
+}
+
+// 实习经历类型
+export interface Internship {
+  company: string
+  position: string
+  period: string
+  projects: string[]
 }
 
 // 导航项类型

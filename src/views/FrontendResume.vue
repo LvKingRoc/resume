@@ -10,7 +10,7 @@ onMounted(() => {
 <template>
   <div class="print-page">
     <!-- 下载按钮（仅屏幕显示，打印时隐藏） -->
-    <a href="/resume-frontend.pdf" download="吕金鹏-前端开发工程师.pdf" class="download-btn">
+    <a href="/吕金鹏 _ 前端开发工程师.pdf" download="吕金鹏-前端开发工程师.pdf" class="download-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
         <polyline points="7 10 12 15 17 10"/>
@@ -24,11 +24,13 @@ onMounted(() => {
         <h1 class="header__name">吕金鹏</h1>
         <p class="header__title">求职意向：前端开发工程师</p>
         <div class="header__contact">
-          <span>15338859106（微信同号）</span>
-          <span class="header__dot">·</span>
+          <span>15338859106</span>
+          <span class="header__sep">|</span>
           <span>1813197353@qq.com</span>
-          <span class="header__dot">·</span>
-          <span>@在线简历：lvkingroc.icu</span>
+          <span class="header__sep">|</span>
+          <span>github.com/lvkingroc</span>
+          <span class="header__sep">|</span>
+          <span>在线简历：lvkingroc.icu</span>
         </div>
       </header>
 
@@ -63,6 +65,22 @@ onMounted(() => {
         </div>
       </section>
 
+      <!-- 实习经历 -->
+      <section class="section">
+        <h2 class="section__title">实习经历</h2>
+        <div class="section__content">
+          <div class="row-header">
+            <span class="row-header__period">2024.07 - 2025.12</span>
+            <span class="row-header__main">北京独角鲸科技有限公司</span>
+            <span class="row-header__sub">全栈开发实习生</span>
+          </div>
+          <ul class="list">
+            <li>先后参与3个商业项目的全栈开发，独立负责前端架构设计、组件开发与跨端适配</li>
+            <li>项目涵盖Electron桌面应用、地图可视化、实时音频处理等前沿技术方向</li>
+          </ul>
+        </div>
+      </section>
+
       <!-- 项目经历 -->
       <section class="section">
         <h2 class="section__title">项目经历</h2>
@@ -74,7 +92,7 @@ onMounted(() => {
               <span class="row-header__main">REEM Insight</span>
               <span class="row-header__sub">房地产数据可视化平台</span>
             </div>
-            <p class="project__desc">面向阿联酋阿布扎比Al Reem Island区域的房地产数据可视化与分析平台，提供地图交互+房源筛选+多层级聚合统计+详情与走势的一体化查询体验，同时支持Web端与Electron桌面端。</p>
+            <p class="project__desc">面向阿联酋阿布扎比Al Reem Island区域的房地产数据可视化与分析平台，处理3万+房源数据，覆盖30+社区，支持Web端与Electron桌面端。</p>
             <p class="project__tech"><strong>技术栈：</strong>Vue 3、Pinia、Google Maps API、Electron 28、Vue I18n</p>
             <ul class="list">
               <li>基于Google Maps JavaScript API实现地图可视化，支持标准/卫星地图切换、自定义样式、POI过滤</li>
@@ -90,7 +108,7 @@ onMounted(() => {
               <span class="row-header__main">OfferHub</span>
               <span class="row-header__sub">智能面试辅助平台</span>
             </div>
-            <p class="project__desc">智能面试辅助平台，支持Electron和Web双平台。核心功能：实时辅助面试、模拟面试、面试总结报告、错题本管理、个人知识库（自定义项目描述供AI参考）。</p>
+            <p class="project__desc">智能面试辅助平台，支持Electron和Web双平台。核心功能包括实时辅助面试、AI模拟面试、错题本与知识库管理。</p>
             <p class="project__tech"><strong>技术栈：</strong>Vue 3、TypeScript、Electron 29、Element Plus、WebSocket、SSE、Web Audio API</p>
             <ul class="list">
               <li>基于Web Audio API实现系统音频+麦克风双路采集，WebSocket双向传输音频流</li>
@@ -100,13 +118,13 @@ onMounted(() => {
           </div>
 
           <!-- 道威管理系统 -->
-          <div class="project">
+          <div class="project project--page-break">
             <div class="row-header">
               <span class="row-header__period">2024.09 - 2025.12</span>
               <span class="row-header__main">道威管理系统</span>
-              <span class="row-header__sub">企业级全栈管理平台</span>
+              <span class="row-header__sub">企业订单管理平台（外包 + 毕设）</span>
             </div>
-            <p class="project__desc">面向小团队的企业管理系统，提供PC端管理后台(Element Plus)和移动端H5/APP(Vant + Capacitor)双端应用，实现订单管理、样品管理、权限控制、实时数据同步等企业级功能，已服务于实际生产环境。</p>
+            <p class="project__desc">面向小团队的企业管理系统，PC端(Element Plus)+移动端H5/APP(Vant + Capacitor)双端应用，累计管理2万+订单，服务20+用户，已服务于实际生产环境。</p>
             <p class="project__tech"><strong>技术栈：</strong>Vue 3、Pinia、Element Plus、Vant、Capacitor</p>
             <ul class="list">
               <li>PC/移动双端同仓开发，共享core核心模块(API封装、认证工具、SSE、心跳等)</li>
@@ -116,13 +134,13 @@ onMounted(() => {
           </div>
 
           <!-- EpClient -->
-          <div class="project project--page-break">
+          <div class="project">
             <div class="row-header">
               <span class="row-header__period">2024.07 - 2024.09</span>
               <span class="row-header__main">EpClient</span>
               <span class="row-header__sub">输液实时监控系统</span>
             </div>
-            <p class="project__desc">面向病区/护士站的输液状态实时监控系统，集中展示床位输液过程数据(滴速、状态、电量、输液量进度等)，帮助医护人员提升巡视效率与异常响应速度。</p>
+            <p class="project__desc">面向病区/护士站的输液状态实时监控系统，支持同时监控50个床位，集中展示输液过程数据，帮助医护人员提升巡视效率与异常响应速度。</p>
             <p class="project__tech"><strong>技术栈：</strong>Electron、Vue 3、Pinia、ECharts、WebSocket</p>
             <ul class="list">
               <li>基于WebSocket实现双向实时通信，监控数据推送延迟≤100ms，支持断线自动重连</li>
@@ -138,7 +156,7 @@ onMounted(() => {
         <h2 class="section__title">校园经历</h2>
         <div class="section__content">
           <div class="row-header">
-            <span class="row-header__period">2022.09 - 至今</span>
+            <span class="row-header__period">2022.09 - 2026.06</span>
             <span class="row-header__main">广东理工学院</span>
             <span class="row-header__sub">副班长 / 项目团队负责人 / 轮滑社副社长</span>
           </div>
@@ -155,9 +173,9 @@ onMounted(() => {
       <section class="section section--last">
         <h2 class="section__title">自我评价</h2>
         <div class="section__content">
-          <p class="summary">Java全栈开发者，熟练掌握Spring Boot后端开发与Vue3前端技术栈，具备独立完成企业级全栈项目的能力。累计完成5个完整项目，涵盖企业管理、实时监控、AI应用、数据可视化等多个领域，具备多项目并行开发经验，部分项目已服务于生产环境。</p>
-          <p class="summary">擅长实时通信技术，精通WebSocket、SSE等长连接方案，在多个项目中实现毫秒级数据同步。后端熟悉JWT鉴权、AOP日志、接口限流等安全实践；前端精通Electron桌面应用、地图可视化等进阶技术。</p>
-          <p class="summary">注重系统设计和代码质量，后端遵循RESTful API规范，前端采用组件化、模块化开发。具备TimescaleDB时序数据库、Redis缓存、AI API集成等技术实践经验。</p>
+          <p class="summary">前端开发者，精通Vue3 + TypeScript技术栈，熟练使用Composition API、Pinia状态管理。拥有一年半实习经验，累计完成5个完整项目，涵盖Electron桌面应用、地图可视化、跨端H5/APP等多个方向，部分项目已服务于生产环境。</p>
+          <p class="summary">擅长跨端开发与实时交互，精通Electron桌面应用开发（自定义窗口、IPC通信、系统API调用），熟练使用Capacitor构建混合APP。在多个项目中实现WebSocket/SSE实时数据同步与Web Audio API音频处理。</p>
+          <p class="summary">注重组件化架构和用户体验，熟练使用Element Plus、Vant、ECharts、Google Maps API等生态工具。具备PC/移动双端同仓开发经验，擅长响应式布局与多设备适配。</p>
           <p class="summary">连续三年国家奖学金获得者，具备优秀的学习能力和自驱力。担任副班长和社团副社长，具备良好的团队管理与组织协调能力。</p>
         </div>
       </section>
@@ -209,14 +227,15 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2mm;
+    gap: 2.5mm;
     font-size: 10pt;
     color: #475569;
-    margin-bottom: 1mm;
+    margin-top: 1mm;
   }
   
-  &__dot {
-    color: #94a3b8;
+  &__sep {
+    color: #cbd5e1;
+    font-weight: 300;
   }
   
 }
@@ -389,9 +408,8 @@ onMounted(() => {
 // 下载按钮 - 悬浮在简历右侧
 .download-btn {
   position: fixed;
-  top: 5%;
-  left: calc(50% + 105mm + 20px);
-  transform: translateY(-50%);
+  top: 20px;
+  right: 20px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -413,7 +431,7 @@ onMounted(() => {
   }
   
   &:hover {
-    transform: translateY(-50%) translateX(2px);
+    transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(26, 54, 93, 0.4);
   }
   

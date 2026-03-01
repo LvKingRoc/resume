@@ -1,12 +1,32 @@
 <script setup lang="ts">
-import { experience, campusRoles } from '@/data/resume'
+import { experience, campusRoles, internship } from '@/data/resume'
 </script>
 
 <template>
   <section id="experience" class="experience">
     <div class="container">
-      <h2 class="section-title">校园经历</h2>
-      
+      <h2 class="section-title">经历</h2>
+
+      <!-- 实习经历 -->
+      <div class="experience__internship">
+        <div class="experience__internship-header">
+          <div class="experience__internship-info">
+            <h3 class="experience__internship-company">{{ internship.company }}</h3>
+            <span class="experience__internship-position">{{ internship.position }}</span>
+            <span class="experience__internship-period">{{ internship.period }}</span>
+          </div>
+        </div>
+        <div class="experience__internship-projects">
+          <div 
+            v-for="(project, idx) in internship.projects" 
+            :key="idx"
+            class="experience__internship-project-tag"
+          >
+            {{ project }}
+          </div>
+        </div>
+      </div>
+
       <!-- 学校信息 -->
       <div class="experience__header">
         <div class="experience__school-info">
@@ -158,6 +178,60 @@ import { experience, campusRoles } from '@/data/resume'
     font-size: $font-size-sm;
     color: $warning-color;
     white-space: nowrap;
+  }
+  
+  &__internship {
+    padding: $spacing-xl;
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: $radius-xl;
+    margin-bottom: $spacing-xl;
+    
+    &-header {
+      margin-bottom: $spacing-md;
+    }
+    
+    &-info {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+    }
+    
+    &-company {
+      font-size: $font-size-2xl;
+      font-weight: 700;
+      color: $text-primary;
+    }
+    
+    &-position {
+      font-size: $font-size-base;
+      color: $primary-color;
+      font-weight: 500;
+    }
+    
+    &-period {
+      font-size: $font-size-sm;
+      color: $text-muted;
+      font-family: $font-mono;
+    }
+    
+    &-projects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+    }
+    
+    &-project-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: $spacing-xs $spacing-md;
+      background: rgba($primary-color, 0.1);
+      border: 1px solid rgba($primary-color, 0.2);
+      border-radius: 9999px;
+      font-size: $font-size-sm;
+      color: $primary-color;
+      white-space: nowrap;
+    }
   }
   
   &__roles {

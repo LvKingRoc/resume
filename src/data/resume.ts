@@ -1,4 +1,4 @@
-import type { PersonalInfo, Education, SkillCategory, Project, Experience, CampusRole } from '@/types'
+import type { PersonalInfo, Education, SkillCategory, Project, Experience, CampusRole, Internship } from '@/types'
 
 // 个人信息
 export const personalInfo: PersonalInfo = {
@@ -6,6 +6,7 @@ export const personalInfo: PersonalInfo = {
   title: 'Java全栈工程师',
   phone: '15338859106',
   email: '1813197353@qq.com',
+  github: 'https://github.com/lvkingroc',
   avatar: 'images/preview.webp'
 }
 
@@ -94,27 +95,10 @@ export const skillCategories: SkillCategory[] = [
 // 项目经历（按时间倒序排列）
 export const projects: Project[] = [
   {
-    id: 0,
-    name: '个人简历网站',
-    subtitle: '响应式简历展示页',
-    description: '基于Vue3 + TypeScript + SCSS构建的个人简历网站，采用组件化架构设计，支持PC端与移动端自适应布局，展示个人技能、项目经历、教育背景等信息。',
-    image: 'images/preview.webp',
-    images: ['images/preview.webp'],
-    techStack: ['Vue 3', 'TypeScript', 'SCSS', 'Vite', 'Composition API'],
-    highlights: [
-      '基于Vue3 Composition API构建，组件化架构设计，代码结构清晰易维护',
-      'PC端与移动端分离设计，设备检测动态加载对应组件',
-      'SCSS变量与Mixins统一管理样式，支持主题配色快速切换',
-      '项目图片弹窗查看功能，支持多图切换与键盘导航',
-      '数据驱动设计，简历内容统一管理，便于维护和更新'
-    ],
-    period: '2025.06 - 至今'
-  },
-  {
     id: 1,
     name: 'REEM Insight',
     subtitle: '房地产数据可视化平台',
-    description: '面向阿联酋阿布扎比Al Reem Island区域的房地产数据可视化与分析平台，提供地图交互+房源筛选+多层级聚合统计+详情与走势的一体化查询体验，同时支持Web端与Electron桌面端。',
+    description: '面向阿联酋阿布扎比Al Reem Island区域的房地产数据可视化与分析平台，处理3万+房源数据，覆盖30+社区，提供地图交互+房源筛选+多层级聚合统计+详情与走势的一体化查询体验，同时支持Web端与Electron桌面端。',
     image: 'images/REEM/1.webp',
     images: ['images/REEM/1.webp', 'images/REEM/2.webp', 'images/REEM/3.webp', 'images/REEM/4.webp', 'images/REEM/5.webp', 'images/REEM/6.webp'],
     techStack: ['Vue 3', 'Pinia', 'Google Maps API', 'Electron 28', 'Vue I18n', 'Spring Boot', 'MyBatis-Plus', 'PostgreSQL'],
@@ -159,8 +143,8 @@ export const projects: Project[] = [
   {
     id: 3,
     name: '道威管理系统',
-    subtitle: '企业级全栈管理平台',
-    description: '面向小团队的企业管理系统，提供PC端管理后台(Element Plus)和移动端H5/APP(Vant + Capacitor)双端应用，实现订单管理、样品管理、权限控制、实时数据同步等企业级功能，已服务于实际生产环境。',
+    subtitle: '企业订单管理平台',
+    description: '面向小团队的企业管理系统，提供PC端管理后台(Element Plus)和移动端H5/APP(Vant + Capacitor)双端应用，累计管理2万+订单，服务20+用户，实现订单管理、样品管理、权限控制、实时数据同步等企业级功能，已服务于实际生产环境。',
     image: 'images/daowei/1.webp',
     images: ['images/daowei/1.webp', 'images/daowei/2.webp', 'images/daowei/3.webp', 'images/daowei/4.webp', 'images/daowei/5.webp', 'images/daowei/6.webp', 'images/daowei/7.webp', 'images/daowei/8.webp', 'images/daowei/9.webp'],
     techStack: ['Vue 3', 'Pinia', 'Element Plus', 'Vant', 'Capacitor', 'Spring Boot', 'MyBatis', 'PostgreSQL'],
@@ -182,7 +166,7 @@ export const projects: Project[] = [
     id: 4,
     name: 'EpClient',
     subtitle: '输液实时监控系统',
-    description: '面向病区/护士站的输液状态实时监控系统，集中展示床位输液过程数据(滴速、状态、电量、输液量进度等)，帮助医护人员提升巡视效率与异常响应速度。',
+    description: '面向病区/护士站的输液状态实时监控系统，支持同时监控50个床位，集中展示床位输液过程数据(滴速、状态、电量、输液量进度等)，帮助医护人员提升巡视效率与异常响应速度。',
     image: 'images/EpClient/1.webp',
     images: ['images/EpClient/1.webp', 'images/EpClient/2.webp', 'images/EpClient/3.webp', 'images/EpClient/4.webp', 'images/EpClient/5.webp', 'images/EpClient/6.webp'],
     techStack: ['Electron', 'Vue 3', 'Pinia', 'ECharts', 'WebSocket', 'Spring Boot', 'MyBatis', 'PostgreSQL', 'TimescaleDB'],
@@ -200,6 +184,23 @@ export const projects: Project[] = [
       '支持白天/夜间/自动主题切换，适配护士站大屏场景'
     ],
     period: '2024.07 - 2024.09'
+  },
+  {
+    id: 5,
+    name: '个人简历网站',
+    subtitle: '响应式简历展示页',
+    description: '基于Vue3 + TypeScript + SCSS构建的个人简历网站，采用组件化架构设计，支持PC端与移动端自适应布局，展示个人技能、项目经历、教育背景等信息。',
+    image: 'images/preview.webp',
+    images: ['images/preview.webp'],
+    techStack: ['Vue 3', 'TypeScript', 'SCSS', 'Vite', 'Composition API'],
+    highlights: [
+      '基于Vue3 Composition API构建，组件化架构设计，代码结构清晰易维护',
+      'PC端与移动端分离设计，设备检测动态加载对应组件',
+      'SCSS变量与Mixins统一管理样式，支持主题配色快速切换',
+      '项目图片弹窗查看功能，支持多图切换与键盘导航',
+      '数据驱动设计，简历内容统一管理，便于维护和更新'
+    ],
+    period: '2025.06 - 至今'
   }
 ]
 
@@ -230,7 +231,7 @@ export const honors: string[] = [
 export const campusRoles: CampusRole[] = [
   {
     title: '省级大创项目负责人',
-    period: '2023.03 - 至今',
+    period: '2023.03 - 2025.06',
     achievements: [
       '带领团队完成「太阳能智能分类垃圾桶」和「高校贫困甄别系统」两个创新项目，已通过省级验收',
       '多次参加创新创业大赛，最高获广东省互联网+省级二等奖'
@@ -238,7 +239,7 @@ export const campusRoles: CampusRole[] = [
   },
   {
     title: '副班长',
-    period: '2022.09 - 至今',
+    period: '2022.09 - 2026.06',
     achievements: [
       '协助辅导员管理班级事务，组织班会、考勤统计',
       '提高班级出勤率至98%',
@@ -247,7 +248,7 @@ export const campusRoles: CampusRole[] = [
   },
   {
     title: '轮滑社副社长',
-    period: '2023.09 - 至今',
+    period: '2023.09 - 2026.06',
     achievements: [
       '负责社团日常运营与活动策划',
       '组织新生培训、校园表演、联谊赛等活动',
@@ -256,11 +257,27 @@ export const campusRoles: CampusRole[] = [
   }
 ]
 
-// 自我评价
-export const selfEvaluation: string[] = [
-  'Java全栈开发者，熟练掌握Spring Boot后端开发与Vue3前端技术栈，具备独立完成企业级全栈项目的能力。累计完成5个完整项目，涵盖企业管理、实时监控、AI应用、数据可视化等多个领域，具备多项目并行开发经验，部分项目已服务于生产环境。',
-  '擅长实时通信技术，精通WebSocket、SSE等长连接方案，在多个项目中实现毫秒级数据同步。后端熟悉JWT鉴权、AOP日志、接口限流等安全实践；前端精通Electron桌面应用、地图可视化等进阶技术。',
-  '注重系统设计和代码质量，后端遵循RESTful API规范，前端采用组件化、模块化开发。具备TimescaleDB时序数据库、Redis缓存、AI API集成等技术实践经验。',
+// 实习经历
+export const internship: Internship = {
+  company: '北京独角鲸科技有限公司',
+  position: '全栈开发实习生',
+  period: '2024.07 - 2025.12',
+  projects: ['REEM Insight 房地产数据可视化平台', 'OfferHub 智能面试辅助平台', 'EpClient 输液实时监控系统']
+}
+
+// 自我评价（后端版）
+export const selfEvaluationBackend: string[] = [
+  'Java全栈开发者，熟练掌握Spring Boot后端开发与Vue3前端技术栈，具备独立完成企业级全栈项目的能力。拥有一年半实习经验，累计完成5个完整项目，涵盖企业管理、实时监控、AI应用、数据可视化等多个领域，部分项目已服务于生产环境。',
+  '擅长后端架构设计与安全实践，熟练运用JWT鉴权、AOP日志切面、接口限流、Spring Security等技术保障系统安全。精通WebSocket、SSE等实时通信方案，在多个项目中实现毫秒级数据同步。',
+  '注重系统设计和代码质量，后端遵循RESTful API规范，具备TimescaleDB时序数据库、Redis缓存、AI API集成等技术实践经验。前端熟练使用Vue3 + TypeScript + Electron进行跨端开发。',
+  '连续三年国家奖学金获得者，具备优秀的学习能力和自驱力。担任副班长和社团副社长，具备良好的团队管理与组织协调能力。'
+]
+
+// 自我评价（前端版）
+export const selfEvaluationFrontend: string[] = [
+  '前端开发者，精通Vue3 + TypeScript技术栈，熟练使用Composition API、Pinia状态管理。拥有一年半实习经验，累计完成5个完整项目，涵盖Electron桌面应用、地图可视化、跨端H5/APP等多个方向，部分项目已服务于生产环境。',
+  '擅长跨端开发与实时交互，精通Electron桌面应用开发（自定义窗口、IPC通信、系统API调用），熟练使用Capacitor构建混合APP。在多个项目中实现WebSocket/SSE实时数据同步与Web Audio API音频处理。',
+  '注重组件化架构和用户体验，熟练使用Element Plus、Vant、ECharts、Google Maps API等生态工具。具备PC/移动双端同仓开发经验，擅长响应式布局与多设备适配。',
   '连续三年国家奖学金获得者，具备优秀的学习能力和自驱力。担任副班长和社团副社长，具备良好的团队管理与组织协调能力。'
 ]
 
